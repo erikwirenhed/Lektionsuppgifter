@@ -8,10 +8,12 @@ public class Uppgift2 {
 		
 		 char[]b = ord.toCharArray();
 		 
+		 int j = 0;
+		 
 		System.out.println(a);
 		
 		for (int i = a.length; i > a.length; i--) {
-			int j = 0;
+			
 			char c = a[i];
 			b[j] = c;
 			j++;
