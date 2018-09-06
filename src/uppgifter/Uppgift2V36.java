@@ -22,7 +22,9 @@ public class Uppgift2V36 {
 		String O = "";
 		for (int i = 0; i < tillfällig.length; i++) {
 			O += stringArr[i];
+			if(i<(tillfällig.length-1)){
 			O += " ";
+			}
 		}
 		return O;
 	}
