@@ -31,7 +31,7 @@ public class MapInterpreter {
 
 					if (c == '*') {
 						b = new ClosedBlock();
-					} else if (c == 'S') {
+					} else if (c == 'S') {	
 						b = new StartBlock();
 						map.setStartX(col);
 						map.setStartY(row);
