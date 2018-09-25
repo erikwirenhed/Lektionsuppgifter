@@ -16,9 +16,9 @@ public class labyrint extends Application {
 
 		Map map = MapInterpreter.interpretMap(new File("src/map.txt"));
 
-
+		
 		Scene scene = new Scene(map, map.getWidth(), map.getHeight());
-		System.out.println(map.getBlocks().get(0).get(0));
+	
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		

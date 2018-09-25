@@ -1,8 +1,13 @@
 package map;
 
+import java.util.ArrayList;
+
 import blocks.Block;
 import blocks.ClosedBlock;
 import blocks.GoalBlock;
+import blocks.OpenBlock;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class mapSolver {
 
@@ -13,6 +18,8 @@ public class mapSolver {
 	static int dir = 1;
 
 	static int steps = 0;
+
+	ArrayList<Block> visited_block = new ArrayList<Block>();
 
 	public mapSolver(Map map) {
 		this.map = map;
@@ -28,29 +35,62 @@ public class mapSolver {
 	}
 
 	private void solve(int x, int y, int dir) {
+
+		Block b = map.getBlock(x, y);
+		
+		
+		
+		if (solution) {
+			return;
+		}
+
+		if ( visited_block.contains(b)){
+			return;
+		}
+		
+		visited_block.add(b);
+
+		if (b instanceof GoalBlock) {
+			System.out.println(steps);
+			return;
+		}
+		if (b instanceof ClosedBlock || b == null) {
+			return;
+		}
+
+		Circle c = new Circle(Block.SIZE / 2, Block.SIZE / 2, Block.SIZE / 3, Color.RED);
+		b.getChildren().add(c);
+
 		steps++;
 
-
 		if (dir == 1) {
-			Block b = map.getBlock(x, y-1);
-			if (b instanceof ClosedBlock) {
-				return;
-			}
 
-			if (b instanceof GoalBlock){
-				
-			}
 			solve(x, y - 1, 1);
+			solve(x, y - 1, 2);
+			solve(x, y - 1, 4);
+
 		}
 		if (dir == 2) {
+
 			solve(x + 1, y, 1);
-		}
-		if (dir == 3) {
-			solve(x, y + 1, 1);
-		}
-		if (dir == 4) {
-			solve(x - 1, y, 1);
+			solve(x + 1, y, 2);
+			solve(x + 1, y, 3);
 		}
 
+		if (dir == 3) {
+			solve(x, y + 1, 2);
+			solve(x, y + 1, 3);
+			solve(x, y + 1, 4);
+		}
+
+		if (dir == 4) {
+			solve(x - 1, y, 1);
+			solve(x - 1, y, 3);
+			solve(x - 1, y, 4);
+		}
+		
+		if(!solution){
+			
+		}
 	}
 }
