@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import blocks.Block;
 import blocks.ClosedBlock;
 import blocks.GoalBlock;
-import blocks.OpenBlock;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -64,26 +63,28 @@ public class mapSolver {
 		steps++;
 
 		if (dir == 1) {
-
+			System.out.println("upp");
 			solve(x, y - 1, 1);
 			solve(x, y - 1, 2);
 			solve(x, y - 1, 4);
 
 		}
 		if (dir == 2) {
-
+			System.out.println("höger");
 			solve(x + 1, y, 1);
 			solve(x + 1, y, 2);
 			solve(x + 1, y, 3);
 		}
 
 		if (dir == 3) {
+			System.out.println("ner");
 			solve(x, y + 1, 2);
 			solve(x, y + 1, 3);
 			solve(x, y + 1, 4);
 		}
 
 		if (dir == 4) {
+			System.out.println("vänster");
 			solve(x - 1, y, 1);
 			solve(x - 1, y, 3);
 			solve(x - 1, y, 4);
