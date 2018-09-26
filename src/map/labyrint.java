@@ -4,6 +4,7 @@ import java.io.File;
 
 import blocks.Block;
 import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
@@ -22,8 +23,9 @@ public class labyrint extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+		new mapSolver(map);
 		
-
+		
 	}
 
 	public static void main(String[] args) {
