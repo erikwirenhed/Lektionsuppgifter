@@ -23,9 +23,20 @@ public class labyrint extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-		new mapSolver(map);
-		
-		
+		mapSolver ms = new mapSolver(map);
+		 AnimationTimer AT = new AnimationTimer(){
+			 long before = 0;
+			@Override
+			public void handle(long now) {
+				// TODO Auto-generated method stub
+				if (now-before >= 1_00_000_000){
+					ms.showNextPath();
+					before=now;
+				}
+			}
+			 
+		 };
+		AT.start();
 	}
 
 	public static void main(String[] args) {

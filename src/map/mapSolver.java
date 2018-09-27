@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import blocks.Block;
 import blocks.ClosedBlock;
 import blocks.GoalBlock;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -19,6 +20,7 @@ public class mapSolver {
 	static int steps = 0;
 
 	ArrayList<Block> visited_block = new ArrayList<Block>();
+	ArrayList<Block> path = new ArrayList<Block>();
 
 	public mapSolver(Map map) {
 		this.map = map;
@@ -37,28 +39,24 @@ public class mapSolver {
 
 		Block b = map.getBlock(x, y);
 
-		Circle c = new Circle(Block.SIZE / 2, Block.SIZE / 2, Block.SIZE / 3, Color.RED);
-
+		
 		if (solution) {
 			return;
 		}
 
 		if (b instanceof GoalBlock) {
 			System.out.println(steps);
+			
 			solution = true;
 			return;
 		}
 
-		if (b instanceof ClosedBlock || b == null) {
+		if (b instanceof ClosedBlock || b == null|| visited_block.contains(b)) {
 
 			return;
 		}
 
-		b.getChildren().add(c);
-
-		if (visited_block.contains(b)) {
-			b.getChildren().remove(b);
-		}
+		path.add(b);
 
 		visited_block.add(b);
 
@@ -67,30 +65,43 @@ public class mapSolver {
 		if (dir == 1) {
 			// System.out.println("upp");
 			solve(x, y - 1, 1);
-			solve(x, y - 1, 2);
-			solve(x, y - 1, 4);
-
+			solve(x+1, y , 2);
+			solve(x-1, y , 4);
 		}
+		
 		if (dir == 2) {
 			// System.out.println("höger");
-			solve(x + 1, y, 1);
+			solve(x , y-1, 1);
 			solve(x + 1, y, 2);
-			solve(x + 1, y, 3);
+			solve(x , y+1, 3);
 		}
 
 		if (dir == 3) {
 			// System.out.println("ner");
-			solve(x, y + 1, 2);
+			solve(x+1, y , 2);
 			solve(x, y + 1, 3);
-			solve(x, y + 1, 4);
+			solve(x-1, y , 4);
 		}
 
 		if (dir == 4) {
 			// System.out.println("vänster");
-			solve(x - 1, y, 1);
-			solve(x - 1, y, 3);
+			solve(x , y- 1, 1);
+			solve(x , y+ 1, 3);
 			solve(x - 1, y, 4);
 		}
+		if(!solution){
+			path.remove(b);
+		}
+	}
+
+	public void showNextPath() {
+		if(path.size()==0){
+			return;
+		}
+		Circle c = new Circle(Block.SIZE / 2, Block.SIZE / 2, Block.SIZE / 3, Color.BLUEVIOLET);
+		path.get(0).getChildren().add(c);
+		path.remove(0);
+		
 
 	}
 }
